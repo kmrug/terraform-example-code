@@ -22,4 +22,5 @@ module "custom_vpc" {
   network_name = var.network_name
   routing_mode = var.routing_mode
   subnets = var.subnets
+  region = var.region
 }
