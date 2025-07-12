@@ -26,7 +26,24 @@ module "custom_vpc" {
   nat_subnet_names = var.nat_subnet_names
 }
 
-# module "vm_instance" {  
-#   source = "./modules/vm_instance"
-#   name = var.vm_name  
-# }
+module "vm_instance" {  
+
+  source = "./modules/vm_instance"
+  instance_name = var.instance_name
+  machine_type = var.machine_type
+  zone = var.zone
+  project_id = var.project_id
+  network = var.network_name
+  subnetwork = var.subnets[0].name # "subnet-1" # This must match the actual subnet name defined in VPC config
+}
+
+module "mysql_instance" {
+
+  source = "./modules/mysql_instance"
+  instance_name = var.mysql_instance_name
+  database_version = var.mysql_database_version
+  region = var.mysql_region
+  tier = var.mysql_tier
+  root_password = var.mysql_root_password 
+
+}

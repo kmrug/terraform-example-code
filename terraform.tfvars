@@ -51,3 +51,13 @@ router_region = "us-central1"
 nat_name = "custom-nat"
 nat_region = "us-central1"
 nat_subnet_names = ["subnet-1", "subnet-2"]
+
+instance_name = "First Terraform VM"
+machine_type = "e2-micro"
+zone = "us-central1-a"
+
+mysql_instance_name = "my-mysql-db"
+mysql_database_version = "MYSQL_8_0" # Need to confirm this
+mysql_region = "us-central1"
+mysql_tier = "db-f1-micro"
+mysql_root_password = "value" # Need to change later
