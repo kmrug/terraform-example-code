@@ -1,32 +1,61 @@
-variable "network_name" {
-  description = "Name of VPC network"
+variable "vpc_name" {
+  description = "The name of the VPC network"
   type = string
 }
 
 variable "routing_mode" {
-  description = "Routing mode (GLOBAL or REGIONAL)"
+  description = "The routing mode for the VPC (REGIONAL or GLOBAL)"
   type = string
   default = "REGIONAL"
 }
 
 variable "subnets" {
-  description = "List of subnets to create with optional secondary IP ranges"
+  description = "List of subnets to create"
   type = list(object({
     name = string
     ip_cidr_range = string
     region = string
-    enable_flow_logs = bool
     private_ip_google_access = bool
-    secondary_ip_range = optional(list(object({
-      range_name = string
-      ip_cidr_range = string
-    })), [])
   }))
-
 }
 
-variable "region" {
-    description = "Region for the VPC and related components"
-    type = string
-    default = "us-central1"
+variable "firewall_rules" {
+  description = "List of firewalls to apply"
+  type = list(object({
+    name = string
+    direction = string
+    priority = number
+    source_ranges = list(string)
+    allow = list(object({
+      protocol = string
+      ports = optional(list(string))
+    }))
+  }))
+}
+
+variable "router_name" {
+  
+  description = "The name of the Cloud Router"
+  type = string
+}
+
+variable "router_region" {
+  
+  description = "The region where the Cloud Router will be created"
+  type = string
+}
+
+variable "nat_name" {
+  description = "The name of the Cloud NAT Gateway"
+  type = string
+}
+
+variable "nat_region" {
+  description = "The region where the Cloud NAT will be created"
+  type = string
+}
+
+variable "nat_subnet_names" {
+  description = "List of subnet names to apply NAT to"
+  type = list(string)
 }

@@ -10,17 +10,23 @@ module "my_bucket_name" {
   name = var.bucket_name
   location = var.bucket_location
   project_id = var.project_id
-  storage_class = var.storage_class
-  enable_versioning = var.enable_versioning
-  labels = var.labels
-
 }
 
 module "custom_vpc" {
 
   source = "./modules/vpc"
-  network_name = var.network_name
+  vpc_name = var.network_name
   routing_mode = var.routing_mode
   subnets = var.subnets
-  region = var.region
+  firewall_rules = var.firewall_rules
+  router_name = var.router_name
+  router_region = var.router_region
+  nat_name = var.nat_name
+  nat_region = var.nat_region
+  nat_subnet_names = var.nat_subnet_names
 }
+
+# module "vm_instance" {  
+#   source = "./modules/vm_instance"
+#   name = var.vm_name  
+# }
